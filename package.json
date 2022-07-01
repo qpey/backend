@@ -1,6 +1,9 @@
 {
 	"main": "build/index.js",
 	"dependencies": {},
+	"engines":{
+		"node": "16.x"
+	},
 	"devDependencies": {
 		"@types/node": "^17.0.25",
 		"concurrently": "^7.1.0",
