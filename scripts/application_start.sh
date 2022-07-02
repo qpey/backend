@@ -8,10 +8,10 @@ cd /home/ec2-user/express-app
 
 #add npm and nvm to path
 export NVM_DIR="$HOME"/.nvm
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # loads nvm bash completion (node is in path now)
 
-#install node_modules 
+#install node_modules
 npm install
 
 # install PM2 to start our app in the background
