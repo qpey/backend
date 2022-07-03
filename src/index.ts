@@ -1,14 +1,14 @@
-const fs = require('fs');
-const {join} = require('path');
-const http = require('http');
+import fs from 'fs';
+import path from 'path';
+import http from 'http';
 
-const path = join(__dirname,'..', 'README.md');
+const filePath = path.join(__dirname,'..', 'README.md');
 
 const server = http.createServer((req: any,res: any)=>{
   if(req.url === '/file'){
-    fs.createReadStream(path).pipe(res)
+    fs.createReadStream(filePath).pipe(res)
   }
 })
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
 server.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
