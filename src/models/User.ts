@@ -30,6 +30,7 @@ const userSchema = new mongoose.Schema<UserDoc>(
 			required: true,
 			length: 255,
 			trim: true,
+			unique: true,
 		},
 		password: {
 			type: String,

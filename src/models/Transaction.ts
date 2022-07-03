@@ -23,10 +23,13 @@ const transactionSchema = new mongoose.Schema<TransactionDoc>(
 			required: true,
 			length: 20,
 			trim: true,
+			unique: true,
 		},
 		flutterWaveTxnNo: {
 			type: Number,
 			required: true,
+			trime: true,
+			unique: true,
 		},
 		user: {
 			type: mongoose.Schema.Types.ObjectId,
