@@ -1,6 +1,6 @@
-# Contributing to Qpay
+# Contributing to Qpey
 
-We would love for you to contribute to Nest and help make it even better than it is
+We would love for you to contribute to qpey and help make it even better than it is
 today! As a contributor, here are the guidelines we would like you to follow:
 
 -   [Code of Conduct](#coc)
@@ -10,16 +10,10 @@ today! As a contributor, here are the guidelines we would like you to follow:
 -   [Submission Guidelines](#submit)
 -   [Coding Rules](#rules)
 -   [Commit Message Guidelines](#commit)
-<!-- - [Signing the CLA](#cla) -->
-
-<!-- ## <a name="coc"></a> Code of Conduct
-Help us keep Qpay open and inclusive. Please read and follow our [Code of Conduct][coc]. -->
 
 ## <a name="question"></a> Got a Question or Problem?
 
 Stack Overflow is a much better place to ask questions since:
-
-<!-- - there are thousands of people willing to help on Stack Overflow [maybe one day] -->
 
 -   questions and answers stay available for public viewing so your question / answer might help someone else
 -   Stack Overflow's voting system assures that the best answers are prominently visible.
@@ -54,17 +48,15 @@ Before you submit an issue, please search the issue tracker, maybe an issue for 
 
 Unfortunately, we are not able to investigate / fix bugs without a minimal reproduction, so if we don't hear back from you we are going to close an issue that don't have enough info to be reproduced.
 
-You can file new issues by filling out our [new issue form](https://github.com/Ian-Balijawa/qpay-backend/issues/new).
+You can file new issues by filling out our [new issue form](https://github.com/qpey/backend/issues/new).
 
 ### <a name="submit-pr"></a> Submitting a Pull Request (PR)
 
 Before you submit your Pull Request (PR) consider the following guidelines:
 
-1. Search [GitHub](https://github.com/Ian-Balijawa/qpay-backend/pulls) for an open or closed PR
-that relates to your submission. You don't want to duplicate effort.
-   <!-- 1. Please sign our [Contributor License Agreement (CLA)](#cla) before sending PRs.
-     We cannot accept code without this. -->
-1. Fork the Ian-Balijawa/qpay-backend repo.
+1. Search [GitHub](https://github.com/qpey/backend/pulls) for an open or closed PR
+   that relates to your submission. You don't want to duplicate effort.
+1. Fork the qpey/backend repo.
 1. Make your changes in a new git branch:
 
     ```shell
@@ -73,8 +65,7 @@ that relates to your submission. You don't want to duplicate effort.
 
 1. Create your patch, **including appropriate test cases**.
 1. Follow our [Coding Rules](#rules).
-1. Run the full Nest test suite (see [common scripts](https://github.com/Ian-Balijawa/qpay-backend/blob/master/CONTRIBUTING.md#common-scripts)),
-   and ensure that all tests pass.
+
 1. Commit your changes using a descriptive commit message that follows our
    [commit message conventions](#commit). Adherence to these conventions
    is necessary because release notes are automatically generated from these messages.
@@ -91,12 +82,11 @@ that relates to your submission. You don't want to duplicate effort.
     git push origin my-fix-branch
     ```
 
-1. In GitHub, send a pull request to `qpay-backend:master`.
+1. In GitHub, send a pull request to `qpey-backend:master`.
 
 -   If we suggest changes then:
 
     -   Make the required updates.
-    -   Re-run the Nest test suites to ensure tests are still passing.
     -   Rebase your branch and force push to your GitHub repository (this will update your Pull Request):
 
         ```shell
@@ -140,17 +130,14 @@ from the main (upstream) repository:
 To ensure consistency throughout the source code, keep these rules in mind as you are working:
 
 -   All features or bug fixes **must be tested** by one or more specs (unit-tests).
-<!--
-// We're working on auto-documentation.
--   All public API methods **must be documented**. (Details TBC). -->
+
 -   We follow [Google's JavaScript Style Guide][js-style-guide], but wrap all code at
     **100 characters**. An automated formatter is available (`npm run format`).
 
 ## <a name="commit"></a> Commit Message Guidelines
 
 We have very precise rules over how our git commit messages can be formatted. This leads to **more
-readable messages** that are easy to follow when looking through the **project history**. But also,
-we use the git commit messages to **generate the Nest change log**.
+readable messages** that are easy to follow when looking through the **project history**.
 
 ### Commit Message Format
 
@@ -172,7 +159,7 @@ to read on GitHub as well as in various git tools.
 
 Footer should contain a [closing reference to an issue](https://help.github.com/articles/closing-issues-via-commit-messages/) if any.
 
-Samples: (even more [samples](https://github.com/Ian-Balijawa/qpay-backend/commits/master))
+Samples: (even more [samples](https://github.com/qpey/backend/commits/master))
 
 ### Revert
 
@@ -215,18 +202,9 @@ reference GitHub issues that this commit **Closes**.
 
 A detailed explanation can be found in this [document][commit-message-format].
 
-<!-- ## <a name="cla"></a> Signing the CLA
-
-Please sign our Contributor License Agreement (CLA) before sending pull requests. For any code
-changes to be accepted, the CLA must be signed. It's a quick process, we promise!
-
-* For individuals we have a [simple click-through form][individual-cla].
-* For corporations we'll need you to
-  [print, sign and one of scan+email, fax or mail the form][corporate-cla]. -->
-
 [commit-message-format]: https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#
 [corporate-cla]: http://code.google.com/legal/corporate-cla-v1.0.html
-[github]: https://github.com/Ian-Balijawa/qpay-backend
+[github]: https://github.com/qpey/backend
 [individual-cla]: http://code.google.com/legal/individual-cla-v1.0.html
 [js-style-guide]: https://google.github.io/styleguide/jsguide.html
 [jsfiddle]: http://jsfiddle.net

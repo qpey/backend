@@ -1,14 +1,28 @@
-const fs = require('fs');
-const {join} = require('path');
-const http = require('http');
+import { app } from './app';
+import mongoose from 'mongoose';
 
-const path = join(__dirname,'..', 'README.md');
+const start = async (): Promise<void> => {
+	if (!process.env.JWT_KEY) {
+		throw new Error('JWT_KEY must be defined!');
+	}
+	if (!process.env.MONGO_URI) {
+		throw new Error('MONGO_URI must be defined!');
+	}
+	if (!process.env.REDIS_URI) {
+		throw new Error('REDIS_URI must be defined!');
+	}
+	if (!process.env.COOKIE_SECRET) {
+		throw new Error('COOKIE_SECRET must be defined');
+	}
+	if (!process.env.API_KEY) {
+		throw new Error('API_KEY must be defined');
+	}
 
-const server = http.createServer((req: any,res: any)=>{
-  if(req.url === '/file'){
-    fs.createReadStream(path).pipe(res)
-  }
-})
-const PORT = process.env.PORT || 3000;
+	try {
+		await mongoose.connect(process.env.MONGO_URI);
+		console.log('Connected to MongoDB');
+	} catch (error) {}
+};
 
-server.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => console.log(`Server running on port: ${PORT}`));
