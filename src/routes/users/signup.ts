@@ -38,13 +38,7 @@ router.post(
 
 		await user.save();
 
-		const userJWT = jwt.sign(
-			{
-				email: user.email,
-			},
-			process.env.JWT_KEY!
-		);
-
+		const userJWT = User.generateAuthToken(user);
 		req.session.jwt = userJWT;
 
 		return res.status(201).send(user);

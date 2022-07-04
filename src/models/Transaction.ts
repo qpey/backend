@@ -2,14 +2,14 @@ import mongoose from 'mongoose';
 import { UserDoc } from './User';
 interface TransactionAttrs {
 	txnNo: number;
-	flutterWaveTxnNo: number;
+	waveTxnNo: number;
 	user: UserDoc;
 }
 
 interface TransactionDoc extends mongoose.Document {
-	userId: string;
 	txnNo: number;
-	flutterWaveTxnNo: number;
+	waveTxnNo: number;
+	userId: string;
 }
 
 interface TransactionModel extends mongoose.Model<TransactionDoc> {
@@ -18,17 +18,17 @@ interface TransactionModel extends mongoose.Model<TransactionDoc> {
 
 const transactionSchema = new mongoose.Schema<TransactionDoc>(
 	{
-		transactionNumber: {
+		txnNo: {
 			type: Number,
 			required: true,
 			length: 20,
 			trim: true,
 			unique: true,
 		},
-		flutterWaveTxnNo: {
+		waveTxnNo: {
 			type: Number,
 			required: true,
-			trime: true,
+			trim: true,
 			unique: true,
 		},
 		user: {

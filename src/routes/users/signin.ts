@@ -1,6 +1,5 @@
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
-import jwt from 'jsonwebtoken';
 import { validateRequest } from '../../middlewares';
 import { BadRequestError } from '../../errors';
 import { User } from '../../models/User';
@@ -33,13 +32,7 @@ router.post(
 			throw new BadRequestError('Invalid credentials');
 		}
 
-		const userJWT = jwt.sign(
-			{
-				email: existingUser.email,
-			},
-			process.env.JWT_KEY!
-		);
-
+		const userJWT = User.generateAuthToken(existingUser);
 		req.session.jwt = userJWT;
 
 		return res.status(200).send(existingUser);

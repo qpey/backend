@@ -1,7 +1,12 @@
-const { clearHash } = require('../services/cache');
+import { clearHash } from '../services/cache';
+import { Request, Response, NextFunction } from 'express';
 
-module.exports = async (req, res, next) => {
+module.exports = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+): Promise<void> => {
 	await next();
 
-	clearHash(req.user.id);
+	clearHash(req.currentUser?.id);
 };
