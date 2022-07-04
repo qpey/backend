@@ -43,14 +43,13 @@ const exec = mongoose.Query.prototype.exec;
 	// Otherwise, issue the query ad store the result in redis
 	const result = await exec.apply(this, arguments[0]);
 
-	//@ts-ignore
-	client.set(key, JSON.stringify(result), 'EX', 10);
+	client.set(key, JSON.stringify(result), { EX: 10 });
 
 	return result;
 };
 
-module.exports = {
-	clearHash(key: any) {
-		client.del(JSON.stringify(key));
-	},
+const clearHash = function (key: any) {
+	client.del(JSON.stringify(key));
 };
+
+export {clearHash}

@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-
+import jwt from 'jsonwebtoken';
 interface UserAttrs {
 	email: string;
 	name: string;
@@ -14,6 +14,7 @@ export interface UserDoc extends mongoose.Document {
 
 interface UserModel extends mongoose.Model<UserDoc> {
 	build(attrs: UserAttrs): UserDoc;
+	generateAuthToken(user: UserDoc): string;
 }
 
 const userSchema = new mongoose.Schema<UserDoc>(
@@ -50,6 +51,18 @@ const userSchema = new mongoose.Schema<UserDoc>(
 
 userSchema.statics.build = (attrs: UserAttrs): UserDoc => {
 	return new User(attrs);
+};
+
+userSchema.statics.generateAuthToken = function (user: UserDoc): string {
+	const userJWT = jwt.sign(
+		{
+			id: user.id,
+			email: user.email,
+		},
+		process.env.JWT_KEY!
+	) as string;
+
+	return userJWT;
 };
 
 const User = mongoose.model<UserDoc, UserModel>('User', userSchema);
