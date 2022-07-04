@@ -40,8 +40,7 @@ router.post(
 			process.env.JWT_KEY!
 		);
 
-		//@ts-ignore
-		req.session = { jwt: userJWT };
+		req.session.jwt = userJWT;
 
 		return res.status(200).send(existingUser);
 	}
