@@ -1,6 +1,5 @@
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
-import jwt from 'jsonwebtoken';
 import { BadRequestError } from '../../errors';
 import { validateRequest } from '../../middlewares';
 import { User } from '../../models/User';
@@ -26,7 +25,8 @@ router.post(
 		const existingUser = await User.findOne({ email });
 
 		if (existingUser) {
-			throw new BadRequestError('Email already in use');
+			const error = new BadRequestError('Email already in use');
+			return res.status(error.statusCode).send(error.serializeErrors());
 		}
 
 		const hashedPassword = await PasswordManager.toHash(password);

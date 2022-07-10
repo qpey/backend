@@ -24,7 +24,19 @@ const start = async (): Promise<void> => {
 	} catch (error) {}
 };
 
+process.on('uncaughtException', err => {
+	console.log('Error: ', err);
+	return err;
+});
+process.on('unhandledRejection', err => {
+	console.log('Error: ', err);
+});
+process.on('uncaughtExceptionMonitor', err => {
+	console.log('Error: ', err);
+});
+
 start();
 
 const PORT = process.env.PORT || 4000;
+
 app.listen(PORT, () => console.log(`Server running on port: ${PORT}`));

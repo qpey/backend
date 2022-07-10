@@ -1,3 +1,4 @@
+import { ClientSession } from 'mongodb';
 import mongoose from 'mongoose';
 import redis from 'redis';
 import util from 'util';
@@ -11,7 +12,19 @@ const client = redis.createClient({
 
 const exec = mongoose.Query.prototype.exec;
 
-(mongoose.Query.prototype as any).cache = function () {
+declare module 'mongoose' {
+	interface SessionOperation {
+		cache: () => this;
+	}
+
+	//@ts-ignore
+	class Query {
+		cache: () => this;
+	}
+}
+//@ts-ignore
+mongoose.Query.prototype.cache = function () {
+	//@ts-ignore
 	this.useCache = true;
 	return this;
 };
@@ -52,4 +65,4 @@ const clearHash = function (key: any) {
 	client.del(JSON.stringify(key));
 };
 
-export {clearHash}
+export { clearHash };

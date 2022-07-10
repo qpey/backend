@@ -1,18 +1,59 @@
 import 'dotenv/config';
-import express, { Express, Request, Response } from 'express';
-import { NotAuthorizedError } from './errors';
-import { errorHandler } from './middlewares';
+import express, { Express, NextFunction, Request, Response } from 'express';
+import cookieSession from 'cookie-session';
+import helmet from 'helmet';
+import morgan from 'morgan';
+import cors from 'cors';
+
+import { NotFoundError } from './errors/not-found-error';
+
+import { currentUserRouter } from './routes/users/current-user';
+import { signinRouter } from './routes/users/signin';
+import { signoutRouter } from './routes/users/signout';
+import { signupRouter } from './routes/users/signup';
+import { CustomError } from './errors';
 
 const app: Express = express();
 
 app.set('trust proxy', true);
+app.disable('X-Powered-By');
+app.use(cors());
+app.use(helmet());
+app.use(morgan('dev'));
+app.use(
+	cookieSession({
+		secure: process.env.NODE_ENV === 'production',
+		secret: process.env.COOKIE_SERCRET!,
+		keys: [process.env.COOKIE_KEY!],
+	})
+);
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.all('*', async (req: Request, res: Response): Promise<never> => {
-	throw new NotAuthorizedError('Route to resource not Found');
+app.use(signinRouter);
+app.use(signoutRouter);
+app.use(signupRouter);
+app.use(currentUserRouter);
+
+app.all('*', async (req: Request, res: Response) => {
+	const error = new NotFoundError('Route to resource not Found');
+	return res.status(error.statusCode).send(error.serializeErrors());
 });
 
-app.get('/', (req: Request, res: Response) => res.send('Hello there !'));
+//app.use(errorHandler);
+app.use((err: Error, _req: Request, res: Response, next: NextFunction) => {
+	if (err instanceof CustomError) {
+		return res.status(err.statusCode).send(err.serializeErrors());
+	}
 
-app.use(errorHandler);
+	return res.status(500).send({
+		errors: [
+			{
+				message:
+					'Something went terribly wrong. Our Engineers are working hard to fix it',
+			},
+		],
+	});
+});
 
 export { app };

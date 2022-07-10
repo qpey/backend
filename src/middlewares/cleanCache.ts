@@ -1,7 +1,7 @@
 import { clearHash } from '../services/cache';
 import { Request, Response, NextFunction } from 'express';
 
-module.exports = async (
+const cleanCache = async (
 	req: Request,
 	res: Response,
 	next: NextFunction
@@ -10,3 +10,5 @@ module.exports = async (
 
 	clearHash(req.currentUser?.id);
 };
+
+export { cleanCache };

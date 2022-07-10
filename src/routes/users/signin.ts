@@ -20,16 +20,18 @@ router.post(
 		const existingUser = await User.findOne({ email });
 
 		if (!existingUser) {
-			throw new BadRequestError('Invalid credentials');
+			const error = new BadRequestError('Invalid credentials');
+			return res.status(error.statusCode).send(error.serializeErrors());
 		}
 
-		const passwordsDoMatch = PasswordManager.compare(
+		const passwordsDoMatch = await PasswordManager.compare(
 			existingUser.password,
 			password
 		);
 
 		if (!passwordsDoMatch) {
-			throw new BadRequestError('Invalid credentials');
+			const error = new BadRequestError('Invalid credentials');
+			return res.status(error.statusCode).send(error.serializeErrors());
 		}
 
 		const userJWT = User.generateAuthToken(existingUser);
