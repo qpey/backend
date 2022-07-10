@@ -3,15 +3,26 @@
 	"main": "build/index.js",
 	"authors": [
 		"ianbalijawa",
-		"leonidassadassdf - can't spell coz I was offline"
+		"leonidassadassdf - can't spell it"
 	],
 	"license": "ISC",
 	"scripts": {
 		"dev": "tsc -w",
+		"start": "ts-node-dev src/index.ts",
 		"start2": "nodemon ./build/index.js",
-		"start": "ts-node-dev src/index.ts"
+		"prod": "pm2 start ./build/index.js",
+		"test": "jest --watchAll --no-cache"
+	},
+	"jest": {
+		"preset": "ts-jest",
+		"testEnvironment": "node",
+		"setupFilesAfterEnv": [
+			"./src/test/setup.ts"
+		]
 	},
 	"dependencies": {
+		"@types/jest": "^28.1.4",
+		"@types/supertest": "^2.0.12",
 		"argon2": "^0.28.5",
 		"axios": "^0.27.2",
 		"cookie-session": "^2.0.0",
@@ -25,12 +36,15 @@
 		"flutterwave-node-v3": "^1.0.9",
 		"helmet": "^5.1.0",
 		"ioredis": "^5.1.0",
+		"jest": "^28.1.2",
 		"joi": "^17.6.0",
 		"jsonwebtoken": "^8.5.1",
 		"mongoose": "^6.4.2",
 		"morgan": "^1.10.0",
 		"prisma": "^4.0.0",
 		"redis": "^4.1.1",
+		"supertest": "^6.2.4",
+		"ts-jest": "^28.0.5",
 		"ts-node": "^10.8.2"
 	},
 	"devDependencies": {
