@@ -18,6 +18,10 @@ RUN npm build
 #install PM2 to start and monitor our app in the background as a process while in prod
 RUN npm install -g pm2
 
+RUN npm run dev
+
+RUN npm run prod
+
 EXPOSE  8080
 CMD ["pm2", "start", "index.js"]
 USER node

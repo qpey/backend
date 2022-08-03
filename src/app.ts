@@ -40,7 +40,6 @@ app.all('*', async (req: Request, res: Response) => {
 	return res.status(error.statusCode).send(error.serializeErrors());
 });
 
-//app.use(errorHandler);
 app.use((err: Error, _req: Request, res: Response, next: NextFunction) => {
 	if (err instanceof CustomError) {
 		return res.status(err.statusCode).send(err.serializeErrors());

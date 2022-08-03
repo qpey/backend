@@ -10,6 +10,7 @@ declare global {
 }
 
 it('should respond with details about the current user', async (): Promise<void> => {
+	// @ts-ignore
 	const cookie = await global.signin();
 
 	const response = await request(app)
