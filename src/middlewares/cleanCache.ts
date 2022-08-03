@@ -6,7 +6,7 @@ const cleanCache = async (
 	res: Response,
 	next: NextFunction
 ): Promise<void> => {
-	await next();
+	next();
 
 	clearHash(req.currentUser?.id);
 };

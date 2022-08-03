@@ -3,13 +3,13 @@ import { UserDoc } from './User';
 interface TransactionAttrs {
 	txnNo: number;
 	waveTxnNo: number;
-	user: UserDoc;
+	// user: UserDoc;
 }
 
 interface TransactionDoc extends mongoose.Document {
 	txnNo: number;
 	waveTxnNo: number;
-	userId: string;
+	// user: string;
 }
 
 interface TransactionModel extends mongoose.Model<TransactionDoc> {
@@ -31,10 +31,15 @@ const transactionSchema = new mongoose.Schema<TransactionDoc>(
 			trim: true,
 			unique: true,
 		},
-		user: {
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'User',
-		},
+		// @ts-ignore
+		// user: {
+		// 	type: mongoose.Schema.Types.ObjectId,
+		// 	ref: 'User',
+		// },
+	// 	userId: {
+	// 		type: String,
+	// 		required:true,
+	// 	}
 	},
 	{
 		toJSON: {
