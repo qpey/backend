@@ -43,6 +43,7 @@ const userSchema = new mongoose.Schema<UserDoc>(
 			transform(doc, ret): void {
 				ret.id = ret._id;
 				delete ret._id;
+				delete ret.__v;
 				delete ret.password;
 			},
 		},

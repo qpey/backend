@@ -1,7 +1,4 @@
 import express, { Response, Request } from 'express';
-import { BadRequestError } from '../../errors';
-import { InternalServerError } from '../../errors';
-import { currentUser } from '../../middlewares/current-user';
 
 const router = express.Router();
 

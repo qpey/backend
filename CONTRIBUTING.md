@@ -3,20 +3,20 @@
 We would love for you to contribute to qpey and help make it even better than it is
 today! As a contributor, here are the guidelines we would like you to follow:
 
--   [Code of Conduct](#coc)
--   [Question or Problem?](#question)
--   [Issues and Bugs](#issue)
--   [Feature Requests](#feature)
--   [Submission Guidelines](#submit)
--   [Coding Rules](#rules)
--   [Commit Message Guidelines](#commit)
+- [Code of Conduct](#coc)
+- [Question or Problem?](#question)
+- [Issues and Bugs](#issue)
+- [Feature Requests](#feature)
+- [Submission Guidelines](#submit)
+- [Coding Rules](#rules)
+- [Commit Message Guidelines](#commit)
 
 ## <a name="question"></a> Got a Question or Problem?
 
 Stack Overflow is a much better place to ask questions since:
 
--   questions and answers stay available for public viewing so your question / answer might help someone else
--   Stack Overflow's voting system assures that the best answers are prominently visible.
+- questions and answers stay available for public viewing so your question / answer might help someone else
+- Stack Overflow's voting system assures that the best answers are prominently visible.
 
 To save your and our time, we will systematically close all issues that are requests for general support and redirect people to Stack Overflow.
 
@@ -35,10 +35,10 @@ Repository. If you would like to _implement_ a new feature, please submit an iss
 a proposal for your work first, to be sure that we can use it.
 Please consider what kind of change it is:
 
--   For a **Major Feature**, first open an issue and outline your proposal so that it can be
-    discussed. This will also allow us to better coordinate our efforts, prevent duplication of work,
-    and help you to craft the change so that it is successfully accepted into the project. For your issue name, please prefix your proposal with `[discussion]`, for example "[discussion]: your feature idea".
--   **Small Features** can be crafted and directly [submitted as a Pull Request](#submit-pr).
+- For a **Major Feature**, first open an issue and outline your proposal so that it can be
+  discussed. This will also allow us to better coordinate our efforts, prevent duplication of work,
+  and help you to craft the change so that it is successfully accepted into the project. For your issue name, please prefix your proposal with `[discussion]`, for example "[discussion]: your feature idea".
+- **Small Features** can be crafted and directly [submitted as a Pull Request](#submit-pr).
 
 ## <a name="submit"></a> Submission Guidelines
 
@@ -59,9 +59,9 @@ Before you submit your Pull Request (PR) consider the following guidelines:
 1. Fork the qpey/backend repo.
 1. Make your changes in a new git branch:
 
-    ```shell
-    git checkout -b my-fix-branch master
-    ```
+   ```shell
+   git checkout -b my-fix-branch main
+   ```
 
 1. Create your patch, **including appropriate test cases**.
 1. Follow our [Coding Rules](#rules).
@@ -70,29 +70,29 @@ Before you submit your Pull Request (PR) consider the following guidelines:
    [commit message conventions](#commit). Adherence to these conventions
    is necessary because release notes are automatically generated from these messages.
 
-    ```shell
-    git commit -a
-    ```
+   ```shell
+   git commit -a
+   ```
 
-    Note: the optional commit `-a` command line option will automatically "add" and "rm" edited files.
+   Note: the optional commit `-a` command line option will automatically "add" and "rm" edited files.
 
 1. Push your branch to GitHub:
 
+   ```shell
+   git push origin my-fix-branch
+   ```
+
+1. In GitHub, send a pull request to `qpey-backend:main `.
+
+- If we suggest changes then:
+
+  - Make the required updates.
+  - Rebase your branch and force push to your GitHub repository (this will update your Pull Request):
+
     ```shell
-    git push origin my-fix-branch
+    git rebase main  -i
+    git push -f
     ```
-
-1. In GitHub, send a pull request to `qpey-backend:master`.
-
--   If we suggest changes then:
-
-    -   Make the required updates.
-    -   Rebase your branch and force push to your GitHub repository (this will update your Pull Request):
-
-        ```shell
-        git rebase master -i
-        git push -f
-        ```
 
 That's it! Thank you for your contribution!
 
@@ -101,38 +101,38 @@ That's it! Thank you for your contribution!
 After your pull request is merged, you can safely delete your branch and pull the changes
 from the main (upstream) repository:
 
--   Delete the remote branch on GitHub either through the GitHub web UI or your local shell as follows:
+- Delete the remote branch on GitHub either through the GitHub web UI or your local shell as follows:
 
-    ```shell
-    git push origin --delete my-fix-branch
-    ```
+  ```shell
+  git push origin --delete my-fix-branch
+  ```
 
--   Check out the master branch:
+- Check out the main branch:
 
-    ```shell
-    git checkout master -f
-    ```
+  ```shell
+  git checkout main  -f
+  ```
 
--   Delete the local branch:
+- Delete the local branch:
 
-    ```shell
-    git branch -D my-fix-branch
-    ```
+  ```shell
+  git branch -D my-fix-branch
+  ```
 
--   Update your master with the latest upstream version:
+- Update your main with the latest upstream version:
 
-    ```shell
-    git pull --ff upstream master
-    ```
+  ```shell
+  git pull --ff upstream main
+  ```
 
 ## <a name="rules"></a> Coding Rules
 
 To ensure consistency throughout the source code, keep these rules in mind as you are working:
 
--   All features or bug fixes **must be tested** by one or more specs (unit-tests).
+- All features or bug fixes **must be tested** by one or more specs (unit-tests).
 
--   We follow [Google's JavaScript Style Guide][js-style-guide], but wrap all code at
-    **100 characters**. An automated formatter is available (`npm run format`).
+- We follow [Google's JavaScript Style Guide][js-style-guide], but wrap all code at
+  **100 characters**. An automated formatter is available (`npm run format`).
 
 ## <a name="commit"></a> Commit Message Guidelines
 
@@ -159,7 +159,7 @@ to read on GitHub as well as in various git tools.
 
 Footer should contain a [closing reference to an issue](https://help.github.com/articles/closing-issues-via-commit-messages/) if any.
 
-Samples: (even more [samples](https://github.com/qpey/backend/commits/master))
+Samples: (even more [samples](https://github.com/qpey/backend/commits/main))
 
 ### Revert
 
@@ -169,24 +169,24 @@ If the commit reverts a previous commit, it should begin with `revert: `, follow
 
 Must be one of the following:
 
--   **build**: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
--   **chore**: Updating tasks etc; no production code change
--   **ci**: Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)
--   **docs**: Documentation only changes
--   **feat**: A new feature
--   **fix**: A bug fix
--   **perf**: A code change that improves performance
--   **refactor**: A code change that neither fixes a bug nor adds a feature
--   **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
--   **test**: Adding missing tests or correcting existing tests
+- **build**: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
+- **chore**: Updating tasks etc; no production code change
+- **ci**: Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)
+- **docs**: Documentation only changes
+- **feat**: A new feature
+- **fix**: A bug fix
+- **perf**: A code change that improves performance
+- **refactor**: A code change that neither fixes a bug nor adds a feature
+- **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+- **test**: Adding missing tests or correcting existing tests
 
 ### Subject
 
 The subject contains succinct description of the change:
 
--   use the imperative, present tense: "change" not "changed" nor "changes"
--   don't capitalize first letter
--   no dot (.) at the end
+- use the imperative, present tense: "change" not "changed" nor "changes"
+- don't capitalize first letter
+- no dot (.) at the end
 
 ### Body
 

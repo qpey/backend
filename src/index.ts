@@ -1,6 +1,6 @@
+import mongoose from "mongoose";
 import { app } from "./app";
 import { KEYS } from "./config/keys";
-const { MongoClient, ServerApiVersion } = require("mongodb");
 
 const start = async (): Promise<void> => {
   if (!process.env.JWT_KEY) {
@@ -18,23 +18,10 @@ const start = async (): Promise<void> => {
   if (!process.env.API_KEY) {
     throw new Error("API_KEY must be defined");
   }
-  try {
-	  const uri = KEYS.MONGO_URI;
+
+  const uri = KEYS.MONGO_URI;
       
-    const client = new MongoClient(uri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      serverApi: ServerApiVersion.v1,
-    });
-	  client.connect((err:any) => {
-		  if (err) {
-			console.error(err)
-		}
-		console.log("Conneted TO DB")
-    });
-  } catch (error) {
-	  console.error(error)
-  }
+  mongoose.connect(uri).then(() => console.log("connected to  DB")).catch((error: any) => console.error(error));
 };
 
 process.on("uncaughtException", (err) => {
