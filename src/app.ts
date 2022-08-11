@@ -5,13 +5,14 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import cors from 'cors';
 
-import { NotFoundError } from './errors/not-found-error';
+import { NotFoundError } from './errors';
+import { CustomError } from './errors';
 
 import { currentUserRouter } from './routes/users/current-user';
 import { signinRouter } from './routes/users/signin';
 import { signoutRouter } from './routes/users/signout';
 import { signupRouter } from './routes/users/signup';
-import { CustomError } from './errors';
+import { homeRouter } from './routes/home';
 
 const app: Express = express();
 
@@ -34,6 +35,7 @@ app.use(signinRouter);
 app.use(signoutRouter);
 app.use(signupRouter);
 app.use(currentUserRouter);
+app.use(homeRouter);
 
 app.all('*', async (req: Request, res: Response) => {
 	const error = new NotFoundError('Route to resource not Found');
