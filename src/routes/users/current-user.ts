@@ -4,7 +4,7 @@ import { currentUser } from '../../middlewares';
 const router = express.Router();
 
 router.get(
-	'/api/users/current-user',
+	'/users/current-user',
 	currentUser,
 	(req: Request, res: Response) => {
 		console.log('currentuser: ', req.currentUser);
