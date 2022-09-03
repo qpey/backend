@@ -5,12 +5,14 @@ import { QPEY_KEYS } from "../config/keys";
 interface UserAttrs {
   email: string;
   name: string;
+  phone: number;
   password: string;
 }
 
 export interface UserDoc extends mongoose.Document {
   name: string;
   email: string;
+  phone: number;
   password: string;
 }
 
@@ -27,6 +29,11 @@ const userSchema = new mongoose.Schema<UserDoc>(
       lowercase: true,
       trim: true,
       length: 50,
+    },
+    phone: {
+      type: Number,
+      required: true,
+      unique: true,
     },
     email: {
       type: String,

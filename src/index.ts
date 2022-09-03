@@ -68,19 +68,4 @@ process.on("uncaughtExceptionMonitor", (err) => {
 });
 
 const PORT = process.env.PORT || SERVER_PORT || 4000;
-
-if (cluster.isPrimary) {
-  for (let i = 0; i < cpus.length; i++) {
-    cluster.fork();
-  }
-
-  cluster.on("exit", (worker, code, signal) => {
-    console.log(`worker ${worker.process.pid} has died`);
-  });
-} else {
-  app.listen(PORT, () =>
-    console.log(`Server running on port: ${PORT}
-  worker ${process.pid} has started
-  `)
-  );
-}
+app.listen(PORT, () => console.log(`Server running on port: ${PORT}`));
