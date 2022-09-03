@@ -4,6 +4,7 @@ interface QPEY {
   REDIS_URI?: string;
   API_KEY?: string;
   COOKIE_SECRET?: string;
+  SERVER_PORT?: number;
 }
 
 interface MOMO {
@@ -32,6 +33,7 @@ if (process.env.NODE_ENV !== "production") {
     REDIS_URI: "asdfasd",
     API_KEY: "asdfasd",
     COOKIE_SECRET: "asdfasd",
+    SERVER_PORT: 4000,
   };
 
   MOMO_KEYS = {
@@ -54,6 +56,7 @@ if (process.env.NODE_ENV !== "production") {
     MONGO_URI: process.env.MONGO_URI,
     REDIS_URI: process.env.REDIS_URI,
     API_KEY: process.env.API_KEY,
+    SERVER_PORT: process.env.SERVER_PORT as unknown as number,
   };
   MOMO_KEYS = {
     COLLECTION_WIDGET: {

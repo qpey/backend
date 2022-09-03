@@ -33,10 +33,10 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(apiPrefixEndPoint, signinRouter);
-app.use(apiPrefixEndPoint, signoutRouter);
-app.use(apiPrefixEndPoint, signupRouter);
-app.use(apiPrefixEndPoint, currentUserRouter);
+app.use(`${apiPrefixEndPoint}/auth`, signinRouter);
+app.use(`${apiPrefixEndPoint}/auth`, signoutRouter);
+app.use(`${apiPrefixEndPoint}/auth`, signupRouter);
+app.use(`${apiPrefixEndPoint}/auth`, currentUserRouter);
 app.use(apiPrefixEndPoint, homeRouter);
 
 app.all("*", async (req: Request, res: Response) => {

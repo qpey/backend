@@ -8,7 +8,7 @@ import { PasswordManager } from '../../services/password';
 const router = express.Router();
 
 router.post(
-	'/users/signup',
+	'/signup',
 	[
 		body('email').isEmail().withMessage('Email must be valid'),
 		body('name')

@@ -1,9 +1,12 @@
+import { MongoClient } from "mongodb";
+import cluster from "cluster";
+import process from "node:process";
+import { cpus } from "os";
 import { app } from "./app";
 import { QPEY_KEYS, MOMO_KEYS } from "./config/keys";
-import { MongoClient } from "mongodb";
-
 const { COLLECTIONS, COLLECTION_WIDGET, REMITANCES } = MOMO_KEYS;
-const { API_KEY, JWT_KEY, MONGO_URI, REDIS_URI, COOKIE_SECRET } = QPEY_KEYS;
+const { API_KEY, JWT_KEY, MONGO_URI, REDIS_URI, COOKIE_SECRET, SERVER_PORT } =
+  QPEY_KEYS;
 
 const start = async (): Promise<void> => {
   if (!COLLECTIONS?.PRIMARY_KEY || !COLLECTIONS?.SECONDARY_KEY) {
@@ -34,14 +37,15 @@ const start = async (): Promise<void> => {
   if (!API_KEY) {
     throw new Error("API_KEY must be defined");
   }
-  const client = new MongoClient(MONGO_URI);
+  const client = new MongoClient(MONGO_URI, {});
   try {
     client.connect(async (err: any) => {
       if (err) {
         console.error(err);
       }
       await client.db("admin").command({ ping: 1 });
-      console.log("Conneted TO DB");
+
+      console.log("Successully Connected to Database!");
     });
   } catch (error) {
     console.error(error);
@@ -49,6 +53,8 @@ const start = async (): Promise<void> => {
     await client.close();
   }
 };
+
+start();
 
 process.on("uncaughtException", (err) => {
   console.log("Error: ", err);
@@ -61,8 +67,20 @@ process.on("uncaughtExceptionMonitor", (err) => {
   console.log("Error: ", err);
 });
 
-start();
+const PORT = process.env.PORT || SERVER_PORT || 4000;
 
-const PORT = process.env.PORT || 4000;
+if (cluster.isPrimary) {
+  for (let i = 0; i < cpus.length; i++) {
+    cluster.fork();
+  }
 
-app.listen(PORT, () => console.log(`Server running on port: ${PORT}`));
+  cluster.on("exit", (worker, code, signal) => {
+    console.log(`worker ${worker.process.pid} has died`);
+  });
+} else {
+  app.listen(PORT, () =>
+    console.log(`Server running on port: ${PORT}
+  worker ${process.pid} has started
+  `)
+  );
+}
