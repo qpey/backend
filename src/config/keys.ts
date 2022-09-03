@@ -5,6 +5,9 @@ interface QPEY {
   API_KEY?: string;
   COOKIE_SECRET?: string;
   SERVER_PORT?: number;
+  TWILIO_PHONE_NO?: string;
+  TWILIO_ACCOUNT_SID?: string;
+  TWILIO_AUTH_TOKEN?: string;
 }
 
 interface MOMO {
@@ -34,6 +37,9 @@ if (process.env.NODE_ENV !== "production") {
     API_KEY: "asdfasd",
     COOKIE_SECRET: "asdfasd",
     SERVER_PORT: 4000,
+    TWILIO_ACCOUNT_SID: "ACea1c5b232d2ff55565012eaffbc76adf",
+    TWILIO_AUTH_TOKEN: "a43f5a278d96061678ab5eb119ea2091",
+    TWILIO_PHONE_NO: "+16184238540",
   };
 
   MOMO_KEYS = {
@@ -57,6 +63,9 @@ if (process.env.NODE_ENV !== "production") {
     REDIS_URI: process.env.REDIS_URI,
     API_KEY: process.env.API_KEY,
     SERVER_PORT: process.env.SERVER_PORT as unknown as number,
+    TWILIO_ACCOUNT_SID: process.env.TWILIO_ACCOUNT_SID,
+    TWILIO_AUTH_TOKEN: process.env.TWILIO_AUTH_TOKEN,
+    TWILIO_PHONE_NO: process.env.TWILIO_PHONE_NO,
   };
   MOMO_KEYS = {
     COLLECTION_WIDGET: {

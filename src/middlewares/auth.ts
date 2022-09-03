@@ -1,24 +1,24 @@
-import { Request, Response, NextFunction } from 'express';
-import jwt from 'jsonwebtoken';
-import {verifyToken} from '../services/token';
-import { BadRequestError } from '../errors';
+import { Request, Response, NextFunction } from "express";
+import jwt from "jsonwebtoken";
+import { verifyToken } from "../services/token";
+import { BadRequestError } from "../errors";
 
 export interface UserPayload {
-	id: string;
-	email: string;
+  id: string;
+  email: string;
 }
 
 declare global {
-	namespace Express {
-		interface Request {
-			currentUser?: UserPayload;
-		}
-	}
+  namespace Express {
+    interface Request {
+      currentUser?: UserPayload;
+    }
+  }
 }
-declare module 'express-session' {
-	interface SessionData {
-		jwt?: string;
-	}
+declare module "express-session" {
+  interface SessionData {
+    jwt?: string;
+  }
 }
 
 export async function AuthenticatedMiddleware(
@@ -28,28 +28,30 @@ export async function AuthenticatedMiddleware(
 ): Promise<Response | void> {
   const bearer = req.headers.authorization;
 
-  if (!bearer || !bearer.startsWith('Bearer ')) {
-    return next(new BadRequestError('Unauthorised'));
+  if (!bearer || !bearer.startsWith("Bearer ")) {
+    return next(new BadRequestError("Unauthorised"));
   }
 
-  const accessToken:string = bearer.split('Bearer ')[1].trim();
+  const accessToken: string = bearer.split("Bearer ")[1].trim();
   try {
     const payload: UserPayload | jwt.JsonWebTokenError = (await verifyToken(
       accessToken
-    ) as unknown as UserPayload);
+    )) as unknown as UserPayload;
 
     if (payload instanceof jwt.JsonWebTokenError) {
-      return next(new BadRequestError('Unauthorised'));
+      return next(new BadRequestError("Unauthorised"));
     }
 
     if (!payload) {
-      return next(new BadRequestError('Unauthorised'));
+      return next(
+        new BadRequestError("Unauthorised. Missing or invalid AuthToken")
+      );
     }
 
     req.currentUser = payload;
 
     return next();
   } catch (error) {
-    return next(new BadRequestError('Unauthorised'));
+    return next(new BadRequestError("Unauthorised"));
   }
 }

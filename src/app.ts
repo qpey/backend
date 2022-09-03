@@ -8,11 +8,12 @@ import cors from "cors";
 import { NotFoundError } from "./errors";
 import { CustomError } from "./errors";
 
-import { currentUserRouter } from "./routes/users/current-user";
-import { signinRouter } from "./routes/users/signin";
-import { signoutRouter } from "./routes/users/signout";
-import { signupRouter } from "./routes/users/signup";
+import { currentUserRouter } from "./routes/auth/current-user";
+import { signinRouter } from "./routes/auth/signin";
+import { signoutRouter } from "./routes/auth/signout";
+import { signupRouter } from "./routes/auth/signup";
 import { homeRouter } from "./routes/home";
+import { smsRouter } from "./routes/sms";
 
 const app: Express = express();
 
@@ -32,12 +33,12 @@ app.use(
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 app.use(`${apiPrefixEndPoint}/auth`, signinRouter);
 app.use(`${apiPrefixEndPoint}/auth`, signoutRouter);
 app.use(`${apiPrefixEndPoint}/auth`, signupRouter);
 app.use(`${apiPrefixEndPoint}/auth`, currentUserRouter);
-app.use(apiPrefixEndPoint, homeRouter);
+app.use(`${apiPrefixEndPoint}`, smsRouter);
+app.use(`${apiPrefixEndPoint}`, homeRouter);
 
 app.all("*", async (req: Request, res: Response) => {
   const error = new NotFoundError("Route to resource not Found");
