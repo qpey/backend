@@ -1,9 +1,16 @@
 import { MongoClient } from "mongodb";
+import mongoose from "mongoose";
 import { app } from "./app";
 import { QPEY_KEYS, MOMO_KEYS } from "./config/keys";
 const { COLLECTIONS, COLLECTION_WIDGET, REMITANCES } = MOMO_KEYS;
-const { API_KEY, JWT_KEY, MONGO_URI, REDIS_URI, COOKIE_SECRET, SERVER_PORT } =
-  QPEY_KEYS;
+const {
+  SECRET_KEY,
+  JWT_KEY,
+  MONGO_URI,
+  REDIS_URI,
+  COOKIE_SECRET,
+  SERVER_PORT,
+} = QPEY_KEYS;
 
 const start = async (): Promise<void> | never => {
   if (!COLLECTIONS?.PRI_KEY || !COLLECTIONS?.SEC_KEY) {
@@ -31,24 +38,14 @@ const start = async (): Promise<void> | never => {
   if (!COOKIE_SECRET) {
     throw new Error("COOKIE_SECRET must be defined");
   }
-  if (!API_KEY) {
+  if (!SECRET_KEY) {
     throw new Error("API_KEY must be defined");
   }
-  const client = new MongoClient(MONGO_URI, {});
-  try {
-    client.connect(async (err: any) => {
-      if (err) {
-        console.error(err);
-      }
-      await client.db("admin").command({ ping: 1 });
 
-      console.log("Successully Connected to Database!");
-    });
-  } catch (error) {
-    console.error(error);
-  } finally {
-    await client.close();
-  }
+  mongoose
+    .connect(MONGO_URI)
+    .then(() => console.log("Connected to Database!"))
+    .catch((err) => console.log(err));
 };
 
 start();

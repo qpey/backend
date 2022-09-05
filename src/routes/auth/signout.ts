@@ -1,13 +1,10 @@
-import express, { Response, Request } from 'express';
-import { BadRequestError } from '../../errors';
-import { InternalServerError } from '../../errors';
-import { currentUser } from '../../middlewares/current-user';
+import express, { Response, Request } from "express";
 
 const router = express.Router();
 
-router.post('/signout', (req: Request, res: Response) => {
-	(req.session as any) = null;
-	return res.send({ message: 'user session destroyed' });
+router.post("/", (req: Request, res: Response) => {
+  (req.session as any) = null;
+  return res.send({ message: "user session destroyed" });
 });
 
 export { router as signoutRouter };

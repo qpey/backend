@@ -8,9 +8,9 @@ import { PasswordManager } from "../../services/password";
 const router = express.Router();
 
 router.post(
-  "/signin",
+  "/",
   [
-    body("email").isEmail().withMessage("Email must be valid"),
+    body("phone").isMobilePhone("en-UG").withMessage("Phone must be valid"),
     body("password").notEmpty().withMessage("You must supply a password"),
   ],
   validateRequest,

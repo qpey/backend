@@ -672,6 +672,13 @@
   dependencies:
     defer-to-connect "^1.0.1"
 
+"@trycourier/courier@^3.15.0":
+  version "3.15.0"
+  resolved "https://registry.yarnpkg.com/@trycourier/courier/-/courier-3.15.0.tgz#44956da5391726cc6a87c5d7d4f1bb600daac55f"
+  integrity sha512-u0lAnWBKHJB4zwE8xOmt7anPH1Y8gq7dRHTu3CvvYSWUgIgGqbpMvsO+DdX7wvy0ZKO3z4/JvH6baxFMsxEYyA==
+  dependencies:
+    axios "^0.21.1"
+
 "@tsconfig/node10@^1.0.7":
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/@tsconfig/node10/-/node10-1.0.9.tgz#df4907fc07a886922637b15e02d4cebc4c0021b2"
@@ -1111,7 +1118,7 @@ aws4@^1.8.0:
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.11.0.tgz#d61f46d83b2519250e2784daf5b09479a8b41c59"
   integrity sha512-xh1Rl34h6Fi1DC2WWKfxUTVqRsNnr6LsKz2+hfwDxQJWmrx8+c7ylaqBMcHfl1U1r2dsifOvKX3LQuLNZ+XSvA==
 
-axios@^0.21.4:
+axios@^0.21.1, axios@^0.21.4:
   version "0.21.4"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.4.tgz#c67b90dc0568e5c1cf2b0b858c43ba28e2eda575"
   integrity sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==

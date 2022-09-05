@@ -14,6 +14,9 @@ import { signoutRouter } from "./routes/auth/signout";
 import { signupRouter } from "./routes/auth/signup";
 import { homeRouter } from "./routes/home";
 import { smsRouter } from "./routes/sms";
+import { verifyPhoneRouter } from "./routes/sms/send-verification-code";
+import { encryptionRouter } from "./routes/crypto/encipher";
+import { decryptionRouter } from "./routes/crypto/decipher";
 
 const app: Express = express();
 
@@ -33,11 +36,15 @@ app.use(
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(`${apiPrefixEndPoint}/auth`, signinRouter);
-app.use(`${apiPrefixEndPoint}/auth`, signoutRouter);
-app.use(`${apiPrefixEndPoint}/auth`, signupRouter);
-app.use(`${apiPrefixEndPoint}/auth`, currentUserRouter);
-app.use(`${apiPrefixEndPoint}`, smsRouter);
+
+app.use(`${apiPrefixEndPoint}/auth/`, signupRouter);
+app.use(`${apiPrefixEndPoint}/auth/signin`, signinRouter);
+app.use(`${apiPrefixEndPoint}/auth/current-user`, currentUserRouter);
+app.use(`${apiPrefixEndPoint}/auth/signout`, signoutRouter);
+app.use(`${apiPrefixEndPoint}/sms`, smsRouter);
+app.use(`${apiPrefixEndPoint}/verify-phone`, verifyPhoneRouter);
+app.use(`${apiPrefixEndPoint}/encrypt`, encryptionRouter);
+app.use(`${apiPrefixEndPoint}/decrypt`, decryptionRouter);
 app.use(`${apiPrefixEndPoint}`, homeRouter);
 
 app.all("*", async (req: Request, res: Response) => {
