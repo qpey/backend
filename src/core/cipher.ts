@@ -2,7 +2,7 @@ import { createCipheriv } from "node:crypto";
 
 const ALGORITHM = "aes-192-gcm";
 
-export const generateCipherText = (
+export const encryptPlainText = (
   plainTextdata: string,
   encryptionkey: string
 ): string => {

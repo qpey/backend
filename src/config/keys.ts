@@ -1,32 +1,5 @@
 import { __PROD__ } from "./__prod__";
-
-interface QPEY {
-  JWT_KEY?: string;
-  MONGO_URI?: string;
-  REDIS_URI?: string;
-  API_KEY?: string;
-  COOKIE_SECRET?: string;
-  SERVER_PORT?: number;
-  TWILIO_PHONE_NO?: string;
-  TWILIO_ACCOUNT_SID?: string;
-  TWILIO_AUTH_TOKEN?: string;
-}
-
-interface MOMO {
-  COLLECTIONS: {
-    PRI_KEY?: string;
-    SEC_KEY?: string;
-  };
-  REMITANCES: {
-    PRI_KEY?: string;
-    SEC_KEY?: string;
-  };
-
-  COLLECTION_WIDGET: {
-    PRI_KEY?: string;
-    SEC_KEY?: string;
-  };
-}
+import { MOMO, QPEY } from "../Interfaces/keys";
 
 let QPEY_KEYS: QPEY = {
   JWT_KEY: __PROD__ ? process.env.JWT_KEY : "asdfasd",
@@ -34,7 +7,7 @@ let QPEY_KEYS: QPEY = {
     ? process.env.MONGO_URI
     : "mongodb+srv://ian:E0H441pFrJaXheca@cluster0.jirp9cp.mongodb.net/?retryWrites=true&w=majority",
   REDIS_URI: __PROD__ ? process.env.REDIS_URI : "asdfasd",
-  API_KEY: __PROD__ ? process.env.API_KEY : "asdfasd",
+  SECRET_KEY: __PROD__ ? process.env.API_KEY : "asdfasd",
   COOKIE_SECRET: __PROD__ ? process.env.COOKIE_SECRET : "asdfasd",
   SERVER_PORT: __PROD__ ? (process.env.SERVER_PORT as unknown as number) : 4000,
   TWILIO_ACCOUNT_SID: __PROD__

@@ -1,22 +1,13 @@
 import express, { Request, Response } from "express";
-import { QPEY_KEYS } from "../../config/keys";
-import { client } from "../../services/notification";
+import { sendSMS } from "../../services/notification";
 
 const router = express.Router();
 
-router.post("/sms", async (req: Request, res: Response) => {
+router.post("/", async (req: Request, res: Response) => {
   const { message, toNo } = req.body;
 
-  client.messages
-    .create({
-      body: message,
-      from: QPEY_KEYS.TWILIO_PHONE_NO,
-      to: toNo,
-    })
-    .then((message) => {
-      console.log(message.sid);
-      res.send(message.sid);
-    });
+  const msg = await sendSMS(message, toNo);
+  res.send(msg);
 });
 
 export { router as smsRouter };

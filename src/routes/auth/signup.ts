@@ -1,8 +1,10 @@
 import express, { Request, Response } from "express";
 import { body } from "express-validator";
+import { initialiseKeyDerivation } from "../../core/key-generator";
 import { BadRequestError } from "../../errors";
 import { validateRequest } from "../../middlewares";
 import { User } from "../../models/User";
+import { sendSMS } from "../../services/notification";
 import { PasswordManager } from "../../services/password";
 
 const router = express.Router();
@@ -14,6 +16,7 @@ router.post(
     body("name")
       .isLength({ min: 3, max: 25 })
       .withMessage("Name must be between 3 and 25 characters"),
+    body("phone").isMobilePhone("en-UG"),
     body("password")
       .isLength({ min: 4, max: 26 })
       .withMessage("Password must be between 4 and 20 characters"),
@@ -22,18 +25,27 @@ router.post(
   async (req: Request, res: Response): Promise<any> => {
     const { name, email, phone, password } = req.body;
 
-    const existingUser = await User.findOne({ email });
+    const emailInUse = await User.findOne({ email });
+    const phoneInUse = await User.findOne({ phone });
 
-    if (existingUser) {
+    if (emailInUse) {
       const error = new BadRequestError("Email already in use");
       return res.status(error.statusCode).send(error.serializeErrors());
     }
+    if (phoneInUse) {
+      const error = new BadRequestError("Phone already in use");
+      return res.status(error.statusCode).send(error.serializeErrors());
+    }
+
+    sendSMS("Welcome to QPey", phone);
+    const key = await initialiseKeyDerivation(password);
 
     const hashedPassword = await PasswordManager.toHash(password);
     const user = User.build({
       name,
       email,
       phone,
+      key,
       password: hashedPassword,
     });
 

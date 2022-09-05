@@ -7,6 +7,7 @@ interface UserAttrs {
   name: string;
   phone: number;
   password: string;
+  key: string;
 }
 
 export interface UserDoc extends mongoose.Document {
@@ -14,6 +15,7 @@ export interface UserDoc extends mongoose.Document {
   email: string;
   phone: number;
   password: string;
+  key: string;
 }
 
 interface UserModel extends mongoose.Model<UserDoc> {
@@ -46,6 +48,9 @@ const userSchema = new mongoose.Schema<UserDoc>(
       type: String,
       required: true,
     },
+    key: {
+      type: String,
+    },
   },
   {
     toJSON: {
@@ -53,6 +58,8 @@ const userSchema = new mongoose.Schema<UserDoc>(
         ret.id = ret._id;
         delete ret._id;
         delete ret.password;
+        delete ret.__v;
+        delete ret.key;
       },
     },
   }
