@@ -1,25 +1,22 @@
 import { MongoClient } from "mongodb";
-import cluster from "cluster";
-import process from "node:process";
-import { cpus } from "os";
 import { app } from "./app";
 import { QPEY_KEYS, MOMO_KEYS } from "./config/keys";
 const { COLLECTIONS, COLLECTION_WIDGET, REMITANCES } = MOMO_KEYS;
 const { API_KEY, JWT_KEY, MONGO_URI, REDIS_URI, COOKIE_SECRET, SERVER_PORT } =
   QPEY_KEYS;
 
-const start = async (): Promise<void> => {
-  if (!COLLECTIONS?.PRIMARY_KEY || !COLLECTIONS?.SECONDARY_KEY) {
+const start = async (): Promise<void> | never => {
+  if (!COLLECTIONS?.PRI_KEY || !COLLECTIONS?.SEC_KEY) {
     throw new Error(
       "COLLECTIONS PRIMARY_KEY and SECONDARY_KEY Must be defined"
     );
   }
-  if (!COLLECTION_WIDGET?.PRIMARY_KEY || !COLLECTION_WIDGET?.SECONDARY_KEY) {
+  if (!COLLECTION_WIDGET?.PRI_KEY || !COLLECTION_WIDGET?.SEC_KEY) {
     throw new Error(
       "COLLECTION_WIDGET PRIMARY_KEY and SECONDARY_KEY Must be defined"
     );
   }
-  if (!REMITANCES?.PRIMARY_KEY || !REMITANCES?.SECONDARY_KEY) {
+  if (!REMITANCES?.PRI_KEY || !REMITANCES?.SEC_KEY) {
     throw new Error("REMITANCES PRIMARY_KEY and SECONDARY_KEY Must be defined");
   }
   if (!JWT_KEY) {
