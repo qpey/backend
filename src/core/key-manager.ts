@@ -27,13 +27,13 @@ export const initialiseKeyDerivation = async (
  * Symmetrically Encrypts the user's key before being stored in the database
  */
 export const encryptDerivedKey = (key: string): string => {
-  return encryptPlainText(key, process.env.SECRET_KEY!);
+  return encryptPlainText(key, QPEY_KEYS.SECRET_KEY!);
 };
 
 /**
- * @param key
+ * @param storedHashed
  * Symmetrically Decrypts the user's key to be used in the decryption of incoming QR code data
  */
 export const decryptDerivedKey = (storedHash: string): string => {
-  return decryptCipherText(storedHash, process.env.SECRET_KEY!);
+  return decryptCipherText(storedHash, QPEY_KEYS.SECRET_KEY!);
 };

@@ -8,8 +8,7 @@ import { User } from "../../models/User";
 const router = express.Router();
 
 router.post(
-  "/",
-  requireAuth,
+  "/encrypt",
   AuthenticatedMiddleware,
   async (req: Request, res: Response) => {
     const { data } = req.body;
@@ -24,9 +23,9 @@ router.post(
         .status(400);
     }
 
-    const user = await User.find({ email: req.currentUser?.email });
+    const user = await User.findOne({ email: req.currentUser?.phone });
     console.log(req.currentUser);
-    const cipherText = encryptPlainText(data, "123456");
+    const cipherText = encryptPlainText(data, user?.key!);
     console.log(cipherText);
     res.send(cipherText);
   }

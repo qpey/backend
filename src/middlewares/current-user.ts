@@ -1,42 +1,42 @@
-import { Request, Response, NextFunction } from 'express';
-import jwt from 'jsonwebtoken';
+import { Request, Response, NextFunction } from "express";
+import jwt from "jsonwebtoken";
 
 export interface UserPayload {
-	id: string;
-	email: string;
+  id: string;
+  phone: string;
 }
 
 declare global {
-	namespace Express {
-		interface Request {
-			currentUser?: UserPayload;
-		}
-	}
+  namespace Express {
+    interface Request {
+      currentUser?: UserPayload;
+    }
+  }
 }
-declare module 'express-session' {
-	interface SessionData {
-		jwt?: string;
-	}
+declare module "express-session" {
+  interface SessionData {
+    jwt?: string;
+  }
 }
 
 export const currentUser = (
-	req: Request,
-	res: Response,
-	next: NextFunction
+  req: Request,
+  res: Response,
+  next: NextFunction
 ): void => {
-	if (!req.session?.jwt) {
-		return next();
-	}
+  if (!req.session?.jwt) {
+    return next();
+  }
 
-	try {
-		const payload = jwt.verify(
-			req.session.jwt,
-			process.env.JWT_KEY!
-		) as UserPayload;
-		req.currentUser = payload;
-	} catch (error) {
-		console.error(error);
-	}
+  try {
+    const payload = jwt.verify(
+      req.session.jwt,
+      process.env.JWT_KEY!
+    ) as UserPayload;
+    req.currentUser = payload;
+  } catch (error) {
+    console.error(error);
+  }
 
-	next();
+  next();
 };

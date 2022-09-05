@@ -43,8 +43,8 @@ app.use(`${apiPrefixEndPoint}/auth/current-user`, currentUserRouter);
 app.use(`${apiPrefixEndPoint}/auth/signout`, signoutRouter);
 app.use(`${apiPrefixEndPoint}/sms`, smsRouter);
 app.use(`${apiPrefixEndPoint}/verify-phone`, verifyPhoneRouter);
-app.use(`${apiPrefixEndPoint}/encrypt`, encryptionRouter);
-app.use(`${apiPrefixEndPoint}/decrypt`, decryptionRouter);
+app.use(`${apiPrefixEndPoint}`, encryptionRouter);
+app.use(`${apiPrefixEndPoint}`, decryptionRouter);
 app.use(`${apiPrefixEndPoint}`, homeRouter);
 
 app.all("*", async (req: Request, res: Response) => {

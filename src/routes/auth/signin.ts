@@ -37,7 +37,7 @@ router.post(
     const userJWT = User.generateAuthToken(existingUser);
     req.session.jwt = userJWT;
 
-    return res.status(200).send(existingUser);
+    return res.status(200).send({ existingUser, userJWT });
   }
 );
 

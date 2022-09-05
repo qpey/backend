@@ -3,7 +3,6 @@ import jwt from "jsonwebtoken";
 import { QPEY_KEYS } from "../config/keys";
 
 interface UserAttrs {
-  email: string;
   name: string;
   phone: number;
   password: string;
@@ -12,7 +11,6 @@ interface UserAttrs {
 
 export interface UserDoc extends mongoose.Document {
   name: string;
-  email: string;
   phone: number;
   password: string;
   key: string;
@@ -37,13 +35,6 @@ const userSchema = new mongoose.Schema<UserDoc>(
       required: true,
       unique: true,
     },
-    email: {
-      type: String,
-      required: true,
-      length: 255,
-      trim: true,
-      unique: true,
-    },
     password: {
       type: String,
       required: true,
@@ -58,8 +49,8 @@ const userSchema = new mongoose.Schema<UserDoc>(
         ret.id = ret._id;
         delete ret._id;
         delete ret.password;
-        delete ret.__v;
         delete ret.key;
+        delete ret.__v;
       },
     },
   }
@@ -73,7 +64,7 @@ userSchema.statics.generateAuthToken = function (user: UserDoc): string {
   const userJWT = jwt.sign(
     {
       id: user.id,
-      email: user.email,
+      phone: user.phone,
     },
     QPEY_KEYS.JWT_KEY as jwt.Secret
   ) as string;
