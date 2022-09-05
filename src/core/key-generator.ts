@@ -14,6 +14,6 @@ export const initialiseKeyDerivation = async (
   const salt = randomBytes(32).toString("hex");
 
   // First, we'll generate the key.
-  const key = await _pbkdf2(password, salt, 100000, 192, "sha512");
+  const key = await _pbkdf2(password, salt, 10000, 192, "sha512");
   return key.toString("hex");
 };

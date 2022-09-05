@@ -5,7 +5,7 @@ import { BadRequestError } from "../errors";
 
 export interface UserPayload {
   id: string;
-  email: string;
+  phone: string;
 }
 
 declare global {

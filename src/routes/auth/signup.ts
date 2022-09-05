@@ -23,15 +23,10 @@ router.post(
   ],
   validateRequest,
   async (req: Request, res: Response): Promise<any> => {
-    const { name, email, phone, password } = req.body;
+    const { name, phone, password } = req.body;
 
-    const emailInUse = await User.findOne({ email });
     const phoneInUse = await User.findOne({ phone });
 
-    if (emailInUse) {
-      const error = new BadRequestError("Email already in use");
-      return res.status(error.statusCode).send(error.serializeErrors());
-    }
     if (phoneInUse) {
       const error = new BadRequestError("Phone already in use");
       return res.status(error.statusCode).send(error.serializeErrors());
@@ -43,7 +38,6 @@ router.post(
     const hashedPassword = await PasswordManager.toHash(password);
     const user = User.build({
       name,
-      email,
       phone,
       key,
       password: hashedPassword,
